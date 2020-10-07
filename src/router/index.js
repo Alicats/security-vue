@@ -15,9 +15,34 @@ export default new Router({
             meta: { title: '自述文件',requireAuth: true },
             children: [
                 {
+                    path: '/enterUser',
+                    component: () => import('../components/page/admin/user/EnterUser.vue'),
+                    meta: { title: '企业用户' }
+                },
+                {
+                    path: '/otherUser',
+                    component: () => import('../components/page/admin/user/OtherUser.vue'),
+                    meta: {title: '其他用户'}
+                },
+                {
+                    path: '/myProduct',
+                    component: () => import('../components/page/product/MyProduct.vue'),
+                    meta: {title: '我的产品'}
+                },
+                {
+                    path: '/userInfo',
+                    component: () => import('../components/page/UserInfo.vue'),
+                    meta: {title: '个人信息'}
+                },
+                {
+                    path: '/index',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
+                    meta: { title: '我的桌面' }
+                },
+                {
                     path: '/dashboard',
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
-                    meta: { title: '系统首页' }
+                    meta: { title: '我的桌面' }
                 },
                 {
                     path: '/icon',

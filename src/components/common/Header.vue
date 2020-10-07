@@ -64,15 +64,15 @@ export default {
     },
     computed: {
         username() {
-            let username = localStorage.getItem('ms_username');
-            return username ? username : this.name;
+            let username = this.$store.getters.getUserInfo.username;
+            return username;
+            // return username ? username : this.name;
         }
     },
     methods: {
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command == 'loginout') {
-                console.log('点击了退出');
                 // this.$store.REMOVE_INFO;
                 this.$store.commit("REMOVE_INFO");
                 // localStorage.removeItem('ms_username');

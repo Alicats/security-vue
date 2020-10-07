@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         // 属性
         token: '',
-        userInfo: JSON.parse(sessionStorage.getItem("userInfo"))
+        userInfo: JSON.parse(sessionStorage.getItem("userInfo")),
+        menuList: JSON.parse(sessionStorage.getItem("menuList"))
     },
     mutations: {
         // set 方法
@@ -19,11 +20,16 @@ export default new Vuex.Store({
             state.userInfo = userInfo;
             sessionStorage.setItem("userInfo",JSON.stringify(userInfo));
         },
+        SET_MENULIST: (state, menuList) => {
+            state.menuList = menuList;
+            sessionStorage.setItem("menuList",JSON.stringify(menuList));
+        },
         REMOVE_INFO: state => {
             state.token = '';
             state.userInfo = {};
             localStorage.setItem("token",'');
-            sessionStorage.setItem("userInfo",JSON.stringify(''))
+            sessionStorage.setItem("userInfo",JSON.stringify(''));
+            sessionStorage.setItem("menuList",JSON.stringify(''));
         }
 
     },
@@ -33,6 +39,9 @@ export default new Vuex.Store({
         },
         getUserInfo: state => {
             return state.userInfo;
+        },
+        getMenuList: state => {
+            return state.menuList;
         }
     },
     actions: {

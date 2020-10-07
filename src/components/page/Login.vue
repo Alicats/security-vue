@@ -52,8 +52,11 @@ export default {
                             _this.$message.success('登录成功');
                             const jwt = res.data.data.token;
                             const userInfo = res.data.data.user;
+                            const menuList = res.data.data.menuList;
+
                             _this.$store.commit("SET_TOKEN",jwt);
                             _this.$store.commit("SET_USERINFO",userInfo);
+                            _this.$store.commit("SET_MENULIST",menuList);
 
                             // localStorage.setItem('ms_username', this.param.username);
                             _this.$router.push("/");
