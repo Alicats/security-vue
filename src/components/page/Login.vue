@@ -47,46 +47,23 @@ export default {
                 if (valid) {
                     const _this = this;
                     this.$axios.post("/authentication",this.param).then(res => {
-                        console.log(res);
                         if(res.data.code === 200){
                             _this.$message.success('登录成功');
                             const jwt = res.data.data.token;
                             const userInfo = res.data.data.user;
                             const menuList = res.data.data.menuList;
 
+
                             _this.$store.commit("SET_TOKEN",jwt);
                             _this.$store.commit("SET_USERINFO",userInfo);
                             _this.$store.commit("SET_MENULIST",menuList);
 
-                            // localStorage.setItem('ms_username', this.param.username);
                             _this.$router.push("/");
-                            // const token = _this.$store.getters.getToken;
-                            // const userInfo1 = _this.$store.getters.getUserInfo;
 
                         }else {
                             _this.$message.error(res.data.message);
                         }
-                        // const jwt = res.headers['Authorization'];
-                        // const  userInfo = res.data.data;
-                        //
-                        // _this.$store.commit("SET_TOKEN",jwt);
-                        // _this.$store.commit("SET_USERINFO",userInfo);
-                        //
-                        // const userInfo1 = _this.$store.getters.getUserInfo;
-                        // _this.$message.success('登录成功');
-                        // localStorage.setItem('ms_username', this.param.username);
-                        // _this.$router.push("/");
                     })
-
-                    /*
-                    this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
-                    */
-
-
-
-
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

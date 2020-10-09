@@ -27,9 +27,10 @@ const i18n = new VueI18n({
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-    const userInfo = sessionStorage.getItem("userInfo");
+    // const userInfo = sessionStorage.getItem("userInfo");
+    const userInfo = localStorage.getItem("userInfo");
     const token = localStorage.getItem("token");
-    console.log(userInfo);
+
     // document.title = `${to.meta.title} | vue-manage-system`;
     // const role = localStorage.getItem('ms_username');
 

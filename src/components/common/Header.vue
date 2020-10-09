@@ -60,7 +60,7 @@ export default {
         };
     },
     created(){
-      this.name = this.$store.getters.getUserInfo.username;
+        this.name = this.$store.getters.getUserInfo.username;
     },
     computed: {
         username() {
