@@ -158,11 +158,20 @@
             },
             // 删除操作
             handleDelete(index, row) {
-                console.log('删除');
-                console.log(index);
-                console.log(row);
                 const _this = this;
 
+                console.log(localStorage.getItem("token"));
+
+                _this.$axios.post("/sda",{},{
+                    headers: {
+                        "Authorization": localStorage.getItem("token")
+                    }
+                }).then(res => {
+                    console.log(res);
+                })
+
+
+                /*
 
                 // 二次确认删除
                 this.$confirm('确定要删除吗？', '提示', {
@@ -183,6 +192,7 @@
                         })
                     })
                     .catch(() => {});
+                    */
             },
             // 多选操作
             handleSelectionChange(val) {
@@ -201,14 +211,26 @@
             // 编辑操作
             handleEdit(index, row) {
                 const _this = this;
+                console.log(localStorage.getItem("token"));
 
-                _this.$axios.post("/sda",{
+                _this.$axios.delete("/product/delProduct/"+row.id,{
                     headers: {
                         "Authorization": localStorage.getItem("token")
                     }
                 }).then(res => {
-                    console.log(res);
+                    _this.listLoading = false;
+                    if(res.data.code === 200) {
+                        _this.$message.success('删除成功');
+                        _this.getData(_this.query.pageIndex);
+                    }
                 })
+                // _this.$axios.post("/sda",{
+                //     headers: {
+                //         "Authorization": localStorage.getItem("token")
+                //     }
+                // }).then(res => {
+                //     console.log(res);
+                // })
 
                 // this.idx = index;
                 // this.form = row;
