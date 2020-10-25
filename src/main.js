@@ -12,7 +12,7 @@ import 'babel-polyfill';
 import axios from 'axios';
 import store from './store'
 
-import "./axios"
+// import "./axios"
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false;
@@ -25,15 +25,49 @@ const i18n = new VueI18n({
     messages
 });
 
+
+const whiteList = ['/login'] // 不重定向白名单
+
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-    // const userInfo = sessionStorage.getItem("userInfo");
-    const userInfo = localStorage.getItem("userInfo");
     const token = localStorage.getItem("token");
+    
+    
+    if(token){
+        if(to.path === '/login'){
+            next({path: '/'})
+        }else{
+            // 判断当前用户是否已拉取完userInfo信息
+            if(store.getters.roles.length === 0){
+                // 拉取用户信息
+                store.dispatch('GetInfo').then(res=>{
+                    const roles = res.data.roles
+                   
+                    store.dispatch('GenerateRoutes',{roles}).then(accessRoutes => {
+                       
+                        // 动态添加可访问路由表
+                        router.addRoutes(accessRoutes)
+                        // hack方法 确保addRoutes已完成
+                        next({...to,replace: true})
+                    })
+                })
+        
+            }else{
+               
+                next()
+            }
+        }
+    }else{
+        if(whiteList.indexOf(to.path) !== -1){
+            next()
+        }else{
+            next({path: '/login'})
+        }
+    }
+    
+    
 
-    // document.title = `${to.meta.title} | vue-manage-system`;
-    // const role = localStorage.getItem('ms_username');
-
+    /*
     if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
         if (token) { // 判断当前的token是否存在 ； 登录存入的token
             if (to.path === '/login') {
@@ -48,6 +82,8 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
+    */
+    
 
     // if(!userInfo && to.path !== '/login'){
     //     next('/login');

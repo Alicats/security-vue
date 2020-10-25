@@ -66,7 +66,8 @@
                         this.tagsList.shift();
                     }
                     this.tagsList.push({
-                        title: route.meta.title,
+                        // title: route.meta.title,
+                        title: route.name,
                         path: route.fullPath,
                         name: route.matched[1].components.default.name
                     })
@@ -88,6 +89,7 @@
             }
         },
         created(){
+            
             this.setTags(this.$route);
             // 监听关闭当前页面的标签页
             bus.$on('close_current_tags', () => {

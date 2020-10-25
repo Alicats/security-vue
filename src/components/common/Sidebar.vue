@@ -159,15 +159,13 @@ export default {
         }
     },
     created() {
-        this.items = this.$store.getters.getMenuList;
+        this.items = this.$store.getters.menuList;
 
         // 通过 Event Bus 进行组件间通信，来折叠侧边栏
         bus.$on('collapse', msg => {
             this.collapse = msg;
             bus.$emit('collapse-content', msg);
         });
-
-
     }
 };
 </script>

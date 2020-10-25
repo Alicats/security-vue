@@ -45,6 +45,15 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
+
+                    this.$store.dispatch('Login', this.param).then(res => {
+                        // this.$router.push({ path: '/dashboard' })
+                        this.$router.push({ path: "/" })
+                    })
+
+           
+
+                    /*
                     const _this = this;
                     this.$axios.post("/authentication",this.param).then(res => {
                         if(res.data.code === 200){
@@ -64,6 +73,7 @@ export default {
                             _this.$message.error(res.data.message);
                         }
                     })
+                    */
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

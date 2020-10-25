@@ -224,11 +224,11 @@ export default {
     computed: {
         role() {
             // return this.name === 'admin' ? '超级管理员' : '普通用户';
-            return this.$store.getters.getUserInfo.role.roleName;
+            return this.$store.getters.userInfo.role.roleName;
         }
     },
     created() {
-        this.name = this.$store.getters.getUserInfo.username;
+        this.name = this.$store.getters.userInfo.username;
         // this.handleListener();
         // this.changeDate();
     },

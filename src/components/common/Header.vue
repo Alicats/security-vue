@@ -21,9 +21,9 @@
                         :content="message?`有${message}条未读消息`:`消息中心`"
                         placement="bottom"
                     >
-                        <router-link to="/tabs">
+                        <!-- <router-link to="/tabs">
                             <i class="el-icon-bell"></i>
-                        </router-link>
+                        </router-link> -->
                     </el-tooltip>
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
@@ -60,11 +60,12 @@ export default {
         };
     },
     created(){
-        this.name = this.$store.getters.getUserInfo.username;
+        this.name = this.$store.getters.userInfo.username;
+    
     },
     computed: {
         username() {
-            let username = this.$store.getters.getUserInfo.username;
+            let username = this.$store.getters.userInfo.username;
             return username;
             // return username ? username : this.name;
         }
